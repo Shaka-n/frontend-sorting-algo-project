@@ -22,7 +22,7 @@ export default class Algorithm extends React.Component{
     }
 
     styleComparators = (arr, idxOne, idxTwo) =>{
-        
+        document.getElementById()
     }
 
     sleep = (milliseconds) => {

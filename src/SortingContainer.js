@@ -1,12 +1,15 @@
 import React from 'react';
 import SortingCard from './SortingCard.js'
 import Algorithm from './Algorithm.js'
+import Bar from './Bar.js'
 
 export default class SortingContainer extends React.Component {
 
     state = {
         unSortedArray: [],
-        sortedArray: []
+        sortedArray: [],
+        initCompare: '',
+        secondaryCompare: ''
     }
 
     randomIntervalInRange(min, max) {
@@ -26,18 +29,18 @@ export default class SortingContainer extends React.Component {
     }
 
     generateBars = (element, idx) =>{
-        const divStyle = {height:element}
-        return <div key={idx} className='bar' style={divStyle} >
-            {/* {element} */}
-        </div>
+        // const divStyle = {height:element}
+        return <Bar 
+        key={idx} 
+        style={{height:element}} 
+        height={element}
+        compare1={this.state.initCompare} 
+        compare2={this.state.secondaryCompare}/>
     }
 
     sortButton = (arr) => {
         console.log("Unsorted Array:", this.state.unSortedArray)
         console.log("Sorted Array:", arr)
-        // let bubbleSortArr = []
-        // bubbleSortArr.push(arr)
-        // console.log(bubbleSortArr)
         this.setState(prevState =>({
             sortedArray: arr
         })
