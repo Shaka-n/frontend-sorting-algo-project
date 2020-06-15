@@ -40,7 +40,7 @@ export default class Algorithm extends React.Component{
 
         return(
             <div>
-                <button onClick={()=>this.handleClick()}>Sort</button>
+                <button onClick={()=>this.handleClick()}>Bubble Sort</button>
             </div>
         )
     }
