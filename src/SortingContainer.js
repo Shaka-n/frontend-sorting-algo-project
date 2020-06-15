@@ -9,7 +9,8 @@ export default class SortingContainer extends React.Component {
         unSortedArray: [],
         sortedArray: [],
         initCompare: null,
-        secondaryCompare: null
+        secondaryCompare: null,
+        shouldSwap: false
     }
 
     randomIntervalInRange(min, max) {
@@ -30,22 +31,34 @@ export default class SortingContainer extends React.Component {
 
     generateBars = (element, idx) => {
         // const divStyle = {height:element}
-        let backgroundColor
+        let bgColor
+        if ( idx === this.state.initCompare ){
+            bgColor = 'green'
+            if(this.state.shouldSwap){
+                bgColor = 'purple'
+            }
+        } else if(this.state.secondaryCompare === idx){
+            bgColor = 'blue'
+        }else{
+            bgColor = 'red'
+        }
+        
         //conditions to set background color
         return <Bar
             key={idx}
-            style={{ height: element, backgroundColor }}
+            style={{ height: element, backgroundColor: bgColor }}
             height={element}
             compare1={this.state.initCompare}
             compare2={this.state.secondaryCompare}
             />
     }
 
-    sortButton = (arr, initCompare, secondaryCompare) => {
+    sortButton = (arr, initCompare, secondaryCompare, shouldSwap) => {
         this.setState(prevState => ({
             sortedArray: arr,
             initCompare,
             secondaryCompare,
+            shouldSwap
         }))
         console.log({
             sortedArray: arr,

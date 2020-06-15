@@ -13,7 +13,7 @@ export default class Algorithm extends React.Component{
                     arr[j+1] = temp
                 }
                 await this.sleep(250)
-                this.props.sortButton(arr, arr[j], arr[j+1])
+                this.props.sortButton(arr, j, j+1, shouldSwap)
             }
         }
         return arr
