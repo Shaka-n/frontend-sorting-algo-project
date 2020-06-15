@@ -5,9 +5,7 @@ export default class Algorithm extends React.Component{
     bubbleSort = async (arr) =>{
         
         for(var i=0; i<arr.length; i++){
-            // window.setTimeout(()=>this.props.sortButton(arr),2000)
             for (var j = 0; j < arr.length; j++){
-                // callback(arr, j, j+1)
                 var shouldSwap = arr[j] > arr[j+1]
                 if(shouldSwap) {
                     let temp = arr[j]
@@ -15,7 +13,7 @@ export default class Algorithm extends React.Component{
                     arr[j+1] = temp
                 }
                 await this.sleep(250)
-                this.props.sortButton(arr)
+                this.props.sortButton(arr, arr[j], arr[j+1])
             }
         }
         return arr

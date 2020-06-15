@@ -8,8 +8,8 @@ export default class SortingContainer extends React.Component {
     state = {
         unSortedArray: [],
         sortedArray: [],
-        initCompare: '',
-        secondaryCompare: ''
+        initCompare: null,
+        secondaryCompare: null
     }
 
     randomIntervalInRange(min, max) {
@@ -28,32 +28,39 @@ export default class SortingContainer extends React.Component {
         this.setState({ unSortedArray })
     }
 
-    generateBars = (element, idx) =>{
+    generateBars = (element, idx) => {
         // const divStyle = {height:element}
-        return <Bar 
-        key={idx} 
-        style={{height:element}} 
-        height={element}
-        compare1={this.state.initCompare} 
-        compare2={this.state.secondaryCompare}/>
+        let backgroundColor
+        //conditions to set background color
+        return <Bar
+            key={idx}
+            style={{ height: element, backgroundColor }}
+            height={element}
+            compare1={this.state.initCompare}
+            compare2={this.state.secondaryCompare}
+            />
     }
 
-    sortButton = (arr) => {
-        console.log("Unsorted Array:", this.state.unSortedArray)
-        console.log("Sorted Array:", arr)
-        this.setState(prevState =>({
-            sortedArray: arr
+    sortButton = (arr, initCompare, secondaryCompare) => {
+        this.setState(prevState => ({
+            sortedArray: arr,
+            initCompare,
+            secondaryCompare,
+        }))
+        console.log({
+            sortedArray: arr,
+            initCompare,
+            secondaryCompare,
         })
-        )
     }
 
-    
+
 
     render() {
         return (
             <div>
-                <Algorithm 
-                    unSortedArray={this.state.unSortedArray} 
+                <Algorithm
+                    unSortedArray={this.state.unSortedArray}
                     sortButton={this.sortButton}
                 />
                 <div className="sorting-container">
