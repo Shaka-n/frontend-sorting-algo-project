@@ -23,40 +23,47 @@ export default class SortingContainer extends React.Component {
     generateNewArray() {
         let newArray = []
         for (let i = 0; i < 10; i++) {
-            newArray.push(this.randomIntervalInRange(10, 110))
+            newArray.push({id: i, value: this.randomIntervalInRange(10, 110)})
         }
         this.setState({ newArray })
     }
 
-    generateBars = (element, idx) => {
+    generateBars = (object, idx) => {
         let bgColor
-        if ( idx === this.state.initCompare ){
+        let element = object.value * 6
+
+        if ( idx === this.state.initCompare){
             bgColor = 'green'
+
             if(this.state.shouldSwap){
                 bgColor = 'purple'
             }
-        } else if(this.state.secondaryCompare === idx){
+        } else if(idx === this.state.secondaryCompare){
             bgColor = 'blue'
-        }else{
+            
+        } else{
             bgColor = 'red'
         }
         
         return <Bar
-            key={idx}
-            style={{ height: element, backgroundColor: bgColor , transform:`translateX(calc(100% * ${idx}))`}}
-            height={element}
+            key={object.id}
+            style={{ 
+                height: `${element}px`, 
+                backgroundColor: bgColor , 
+                transform:`translateX(calc(100% * ${idx}))`
+            }}
             compare1={this.state.initCompare}
             compare2={this.state.secondaryCompare}
             />
     }
 
     sortButton = (arr, initCompare, secondaryCompare, shouldSwap) => {
-        this.setState(prevState => ({
-            sortedArray: arr,
+        this.setState({
+            sortedArray: [...arr],
             initCompare,
             secondaryCompare,
             shouldSwap
-        }))
+        })
     }
 
     // getUsers = () =>{
@@ -66,7 +73,7 @@ export default class SortingContainer extends React.Component {
     //   }
 
     render() {
-        // this.getUsers()
+        console.log(this.state.newArray)
         return (
             <div>
                 <Algorithm
@@ -77,7 +84,7 @@ export default class SortingContainer extends React.Component {
 
                 <div className="sorting-container">
                     {this.state.newArray.map((element, idx) => (
-                        this.generateBars(element * 6, idx)
+                        this.generateBars(element, idx)
                     ))
                     }
                 </div>

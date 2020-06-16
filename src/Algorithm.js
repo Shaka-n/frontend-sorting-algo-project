@@ -1,43 +1,49 @@
 import React from 'react'
 
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 export default class Algorithm extends React.Component{
     
     bubbleSort = async (arr) =>{
-        var noSwaps
-        for(var i=0; i<arr.length; i++){
+        let noSwaps
+        for(let i=0; i<arr.length; i++){
             noSwaps = true
-            for (var j = 0; j < arr.length; j++){
-                var shouldSwap = arr[j] > arr[j+1]
+            for (let j = 0; j < arr.length; j++){
+                let shouldSwap = arr[j+1] ? (arr[j].value > arr[j+1].value) : false
                 if(shouldSwap) {
                     let temp = arr[j]
                     arr[j] = arr[j+1]
                     arr[j+1] = temp
                     noSwaps = false
                 }
-                await this.sleep(250)
                 this.props.sortButton(arr, j, j+1, shouldSwap)
+                await sleep(3000)
             }
             if(noSwaps) break;
         }
         return arr
     }
 
+    
+
     selectionSort = async (arr) =>{
         for(var i=0; i < arr.length; i++){
             var lowest = i
             for(var j=i+1; j<arr.length; j++){
-                var shouldSwap = arr[j] < arr[lowest]
+                var shouldSwap = arr[j+1] ? (arr[j].value > arr[j+1].value) : false
                 if(shouldSwap){
                     lowest = j
                 }
-                await this.sleep(250)
+                await sleep(250)
                 this.props.sortButton(arr, j, lowest, shouldSwap)
             }
             var temp = arr[i]
             arr[i] = arr[lowest]
             arr[lowest]=temp
         }
-        await this.sleep(250)
+        await sleep(250)
         this.props.sortButton(arr, j, lowest, shouldSwap)
         return arr;
     }
@@ -91,10 +97,6 @@ export default class Algorithm extends React.Component{
     }
 
 
-
-    sleep = (milliseconds) => {
-        return new Promise(resolve => setTimeout(resolve, milliseconds))
-    }
 
     handleBubbleClick = () => {
         this.bubbleSort(this.props.newArray)
