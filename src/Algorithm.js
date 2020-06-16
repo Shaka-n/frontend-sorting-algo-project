@@ -16,35 +16,18 @@ export default class Algorithm extends React.Component{
                 }
                 await this.sleep(250)
                 this.props.sortButton(arr, j, j+1, shouldSwap)
-                //also send over noSwaps so that we know when to set the entire array equal to
-                // one color to demonstrate that the array is now completely sorted?
-                // maybe not something to implement right away bc it could maybe cause problems
-                // more so something to keep in mind and implement once we have all of our
-                // sorts down
             }
             if(noSwaps) break;
         }
         return arr
     }
 
-    /* change #3:
-        Remove styleComparators function
-    */
-    styleComparators = (arr, idxOne, idxTwo) =>{
-        document.getElementById()
-    }
-    ////////
-
     sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
       }
 
-    handleClick = () =>{
-        const sortedArray = this.bubbleSort(this.props.unSortedArray)
-        /* change #2:
-            why are we setting this equal to sortedArray?
-            Should we remove "const sortedArray =" 
-        */
+    handleClick = () => {
+        this.bubbleSort(this.props.newArray)
     }
     // change this.handleClick to this.BubbleClick, we are going to have a button for each sort
     

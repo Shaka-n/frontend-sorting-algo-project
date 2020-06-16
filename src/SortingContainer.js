@@ -4,20 +4,8 @@ import Bar from './Bar.js'
 
 export default class SortingContainer extends React.Component {
 
-    /* Goals for today: 
-        Selection Sort,
-        Merge Sort,
-        Quick Sort
-    */
-
-    /* Goals for Wednesday: 
-        Radix Sort,
-        Insertion Sort (basic one if there's time),
-        add audio,
-        add simple backend    
-    */
     state = {
-        unSortedArray: [],
+        newArray: [],
         sortedArray: [],
         initCompare: null,
         secondaryCompare: null,
@@ -29,24 +17,18 @@ export default class SortingContainer extends React.Component {
     }
 
     componentDidMount() {
-        /*change #1: 
-            generateUnSortedArray() to
-            generateNewArray, so we can have a button to generate a new array
-            changes on screen arrays 
-        */
-        this.generateUnSortedArray()
+        this.generateNewArray()
     }
 
-    generateUnSortedArray() {
-        let unSortedArray = []
+    generateNewArray() {
+        let newArray = []
         for (let i = 0; i < 10; i++) {
-            unSortedArray.push(this.randomIntervalInRange(10, 110))
+            newArray.push(this.randomIntervalInRange(10, 110))
         }
-        this.setState({ unSortedArray })
+        this.setState({ newArray })
     }
 
     generateBars = (element, idx) => {
-        // const divStyle = {height:element}
         let bgColor
         if ( idx === this.state.initCompare ){
             bgColor = 'green'
@@ -59,7 +41,6 @@ export default class SortingContainer extends React.Component {
             bgColor = 'red'
         }
         
-        //conditions to set background color
         return <Bar
             key={idx}
             style={{ height: element, backgroundColor: bgColor }}
@@ -84,11 +65,13 @@ export default class SortingContainer extends React.Component {
         return (
             <div>
                 <Algorithm
-                    unSortedArray={this.state.unSortedArray}
+                    newArray={this.state.newArray}
                     sortButton={this.sortButton}
                 />
+                    <button onClick={() => this.generateNewArray()}> Generate New Array</button>
+
                 <div className="sorting-container">
-                    {this.state.unSortedArray.map((element, idx) => (
+                    {this.state.newArray.map((element, idx) => (
                         this.generateBars(element * 6, idx)
                     ))
                     }
