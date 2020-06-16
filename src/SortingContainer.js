@@ -1,10 +1,21 @@
 import React from 'react';
-import SortingCard from './SortingCard.js'
 import Algorithm from './Algorithm.js'
 import Bar from './Bar.js'
 
 export default class SortingContainer extends React.Component {
 
+    /* Goals for today: 
+        Selection Sort,
+        Merge Sort,
+        Quick Sort
+    */
+
+    /* Goals for Wednesday: 
+        Radix Sort,
+        Insertion Sort (basic one if there's time),
+        add audio,
+        add simple backend    
+    */
     state = {
         unSortedArray: [],
         sortedArray: [],
@@ -18,6 +29,11 @@ export default class SortingContainer extends React.Component {
     }
 
     componentDidMount() {
+        /*change #1: 
+            generateUnSortedArray() to
+            generateNewArray, so we can have a button to generate a new array
+            changes on screen arrays 
+        */
         this.generateUnSortedArray()
     }
 
@@ -60,11 +76,6 @@ export default class SortingContainer extends React.Component {
             secondaryCompare,
             shouldSwap
         }))
-        console.log({
-            sortedArray: arr,
-            initCompare,
-            secondaryCompare,
-        })
     }
 
 
