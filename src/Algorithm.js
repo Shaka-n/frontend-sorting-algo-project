@@ -48,6 +48,7 @@ export default class Algorithm extends React.Component{
         let j = 0
 
         let indexj = arr.indexOf(arr2[j])
+                    
         let indexi = arr.indexOf(arr1[i])
     
         while( i < arr1.length && j<arr2.length){

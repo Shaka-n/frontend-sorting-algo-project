@@ -43,7 +43,7 @@ export default class SortingContainer extends React.Component {
         
         return <Bar
             key={idx}
-            style={{ height: element, backgroundColor: bgColor }}
+            style={{ height: element, backgroundColor: bgColor , transform:`translateX(calc(100% * ${idx}))`}}
             height={element}
             compare1={this.state.initCompare}
             compare2={this.state.secondaryCompare}
@@ -59,14 +59,14 @@ export default class SortingContainer extends React.Component {
         }))
     }
 
-    getUsers = () =>{
-        fetch("http://localhost:3000/users")
-        .then(resp => resp.json())
-        .then(users=>console.log(users))
-      }
+    // getUsers = () =>{
+    //     fetch("http://localhost:3000/users")
+    //     .then(resp => resp.json())
+    //     .then(users=>console.log(users))
+    //   }
 
     render() {
-        this.getUsers()
+        // this.getUsers()
         return (
             <div>
                 <Algorithm
