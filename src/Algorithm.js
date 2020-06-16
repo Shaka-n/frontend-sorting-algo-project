@@ -16,42 +16,53 @@ export default class Algorithm extends React.Component{
                 }
                 await this.sleep(250)
                 this.props.sortButton(arr, j, j+1, shouldSwap)
-                //also send over noSwaps so that we know when to set the entire array equal to
-                // one color to demonstrate that the array is now completely sorted?
-                // maybe not something to implement right away bc it could maybe cause problems
-                // more so something to keep in mind and implement once we have all of our
-                // sorts down
             }
             if(noSwaps) break;
         }
         return arr
     }
 
-    /* change #3:
-        Remove styleComparators function
-    */
-    styleComparators = (arr, idxOne, idxTwo) =>{
-        document.getElementById()
+    selectionSort = async (arr) =>{
+        for(var i=0; i < arr.length; i++){
+            var lowest = i
+            for(var j=i+1; j<arr.length; j++){
+                var shouldSwap = arr[j] < arr[lowest]
+                if(shouldSwap){
+                    lowest = j
+                }
+                await this.sleep(250)
+                this.props.sortButton(arr, j, lowest, shouldSwap)
+            }
+            var temp = arr[i]
+            arr[i] = arr[lowest]
+            arr[lowest]=temp
+        }
+        await this.sleep(250)
+        this.props.sortButton(arr, j, lowest, shouldSwap)
+        return arr;
     }
-    ////////
+
+
 
     sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
-      }
-
-    handleClick = () =>{
-        const sortedArray = this.bubbleSort(this.props.unSortedArray)
-        /* change #2:
-            why are we setting this equal to sortedArray?
-            Should we remove "const sortedArray =" 
-        */
     }
-    // change this.handleClick to this.BubbleClick, we are going to have a button for each sort
+
+    handleBubbleClick = () => {
+        this.bubbleSort(this.props.newArray)
+    }
+
+    handleSelectionClick = () => {
+        this.selectionSort(this.props.newArray)
+    }
+
+    
     
     render(){
         return(
             <div>
-                <button onClick={()=>this.handleClick()}>Bubble Sort</button>
+                <button onClick={()=> this.handleBubbleClick()}>Bubble Sort</button>
+                <button onClick= {()=> this.handleSelectionClick()}>Selection Sort</button>
             </div>
         )
     }
