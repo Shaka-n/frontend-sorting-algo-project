@@ -22,19 +22,47 @@ export default class Algorithm extends React.Component{
         return arr
     }
 
+    selectionSort = async (arr) =>{
+        for(var i=0; i < arr.length; i++){
+            var lowest = i
+            for(var j=i+1; j<arr.length; j++){
+                var shouldSwap = arr[j] < arr[lowest]
+                if(shouldSwap){
+                    lowest = j
+                }
+                await this.sleep(250)
+                this.props.sortButton(arr, j, lowest, shouldSwap)
+            }
+            var temp = arr[i]
+            arr[i] = arr[lowest]
+            arr[lowest]=temp
+        }
+        await this.sleep(250)
+        this.props.sortButton(arr, j, lowest, shouldSwap)
+        return arr;
+    }
+
+
+
     sleep = (milliseconds) => {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
-      }
+    }
 
-    handleClick = () => {
+    handleBubbleClick = () => {
         this.bubbleSort(this.props.newArray)
     }
-    // change this.handleClick to this.BubbleClick, we are going to have a button for each sort
+
+    handleSelectionClick = () => {
+        this.selectionSort(this.props.newArray)
+    }
+
+    
     
     render(){
         return(
             <div>
-                <button onClick={()=>this.handleClick()}>Bubble Sort</button>
+                <button onClick={()=> this.handleBubbleClick()}>Bubble Sort</button>
+                <button onClick= {()=> this.handleSelectionClick()}>Selection Sort</button>
             </div>
         )
     }
