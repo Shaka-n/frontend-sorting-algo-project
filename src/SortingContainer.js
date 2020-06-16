@@ -78,9 +78,14 @@ export default class SortingContainer extends React.Component {
         }))
     }
 
-
+    getUsers = () =>{
+        fetch("http://localhost:3000/users")
+        .then(resp => resp.json())
+        .then(users=>console.log(users))
+      }
 
     render() {
+        this.getUsers()
         return (
             <div>
                 <Algorithm
