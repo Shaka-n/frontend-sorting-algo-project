@@ -11,6 +11,7 @@ export default class SortingContainer extends React.Component {
         secondaryCompare: null,
         shouldSwap: null
     }
+    //add new state that takes in arrays for visuals
 
     randomIntervalInRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
