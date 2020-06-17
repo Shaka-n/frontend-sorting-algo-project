@@ -28,6 +28,7 @@ export default class SortingContainer extends React.Component {
         this.setState({ newArray })
     }
 
+    //every element in my array has a bar associated with it, bars have a position
     generateBars = (object, idx) => {
         let bgColor
         let element = object.value * 6
