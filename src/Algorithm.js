@@ -67,13 +67,16 @@ export default class Algorithm extends React.Component{
         return arr
     }
 
-    merge = async (arr1, arr2) => {
-        console.log(arr1)
-        console.log(arr2)
+    merge = async (arr, arr1, arr2) => {
+        console.log(arr)
+        // console.log(arr1)
+        // console.log(arr2)
         let results = []
         let i = 0
         let j = 0
-        this.props.visualizeSplit(arr1, arr2)
+        this.props.visualizeSplit(arr, arr1, arr2)
+        // shouldSwap
+        this.props.sortButton(arr, arr1[i], arr2[j])
         while( i < arr1.length && j < arr2.length){
             // highlight arr1[i] and arr2[j]
             if(arr2[j].value > arr1[i].value){
@@ -92,17 +95,17 @@ export default class Algorithm extends React.Component{
             results.push(arr2[j])
             j++;
         }
-        // console.log(results)
         await sleep(250)
         return results
     }
     
-    mergeSort =(arr) =>{
+    mergeSort = async (arr) =>{
         if(arr.length <= 1) return arr
         let mid = Math.floor(arr.length/2)
-        let left = this.mergeSort(arr.slice(0, mid))
-        let right = this.mergeSort(arr.slice(mid)) 
-        return this.merge(left,right)
+        let left = await this.mergeSort(arr.slice(0, mid))
+        let right = await this.mergeSort(arr.slice(mid)) 
+        this.setState({})
+        return this.merge(arr, left,right)
     }
 
     // update the screen before return results

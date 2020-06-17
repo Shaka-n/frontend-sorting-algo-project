@@ -88,7 +88,7 @@ export default class SortingContainer extends React.Component {
         })
     }
 
-    visualizeSplit = (arr1, arr2) =>{
+    visualizeSplit = (arr, arr1, arr2) =>{
         let arr1Ids= []
         let arr2Ids = []
        for (var i=0; i < arr1.length; i++){
