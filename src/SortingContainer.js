@@ -88,7 +88,21 @@ export default class SortingContainer extends React.Component {
         })
     }
 
+    updateMergeSort = (mergedArray) => {
+        this.setState(prevState => {
+            console.log(prevState.newArray)
+            const target = prevState.newArray.find(e => mergedArray.find(e2 =>e.id === e2.id))
+            const targetIndex = prevState.newArray.indexOf(target)
+            const firstPortion = prevState.newArray.slice(0, targetIndex)
+            const secondPortion = prevState.newArray.slice(targetIndex+mergedArray.length, prevState.newArray.length)
+            console.log("first portion: ", firstPortion, "second portion: ", secondPortion)
+            return {newArray: [...firstPortion, ...mergedArray, ...secondPortion]}
+        })
+
+    }
+
     visualizeSplit = (arr, arr1, arr2) =>{
+        
         let arr1Ids= []
         let arr2Ids = []
        for (var i=0; i < arr1.length; i++){
@@ -100,7 +114,8 @@ export default class SortingContainer extends React.Component {
         }
         this.setState({
             mergeArr1: arr1Ids,
-            mergeArr2: arr2Ids
+            mergeArr2: arr2Ids,
+            newArray: [...arr1, ...arr2]
         })
         console.log("Arr 1 Ids:", arr1Ids)
         console.log("Arr 2 Ids:", arr2Ids)
@@ -120,6 +135,7 @@ export default class SortingContainer extends React.Component {
                     newArray={this.state.newArray}
                     sortButton={this.sortButton}
                     visualizeSplit={this.visualizeSplit}
+                    updateMergeSort={this.updateMergeSort}
                 />
                     <button onClick={() => this.generateNewArray()}> Generate New Array</button>
 
