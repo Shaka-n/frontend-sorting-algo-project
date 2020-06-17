@@ -9,7 +9,7 @@ export default class SortingContainer extends React.Component {
         sortedArray: [],
         initCompare: null,
         secondaryCompare: null,
-        shouldSwap: false
+        shouldSwap: null
     }
 
     randomIntervalInRange(min, max) {

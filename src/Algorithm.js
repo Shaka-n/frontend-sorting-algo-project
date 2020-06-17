@@ -19,7 +19,7 @@ export default class Algorithm extends React.Component{
                     noSwaps = false
                 }
                 this.props.sortButton(arr, j, j+1, shouldSwap)
-                await sleep(3000)
+                await sleep(250)
             }
             if(noSwaps) break;
         }
@@ -32,7 +32,7 @@ export default class Algorithm extends React.Component{
         for(var i=0; i < arr.length; i++){
             var lowest = i
             for(var j=i+1; j<arr.length; j++){
-                var shouldSwap = arr[j+1] ? (arr[j].value > arr[j+1].value) : false
+                var shouldSwap = arr[j].value < arr[lowest].value
                 if(shouldSwap){
                     lowest = j
                 }
