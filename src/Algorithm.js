@@ -58,6 +58,8 @@ export default class Algorithm extends React.Component {
             }
             arr[j+1].value = currentVal
         }
+        await sleep(250)
+        this.props.sortButton(arr, j, i, true)
         return arr
     }
 
