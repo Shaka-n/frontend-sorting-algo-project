@@ -48,6 +48,25 @@ export default class Algorithm extends React.Component{
         return arr;
     }
 
+    insertionSort = async (arr) =>{
+        let shouldSwap;
+	    console.log(arr)
+        for(var i = 1; i < arr.length; i++){
+            var currentVal = arr[i];
+            for(var j = i - 1; j >= 0 && arr[j].value > currentVal.value; j--) {
+                shouldSwap = true
+                arr[j+1] = arr[j]
+                console.log(arr)
+                await sleep(250)
+                this.props.sortButton(arr, arr[i].id, arr[j].id, shouldSwap)
+            }
+            arr[j+1] = currentVal;
+            shouldSwap = false
+            console.log(arr)
+        }
+        return arr
+    }
+
     merge = async (arr1, arr2) => {
         console.log(arr1)
         console.log(arr2)
@@ -109,6 +128,10 @@ export default class Algorithm extends React.Component{
         this.selectionSort(this.props.newArray)
     }
 
+    handleInsertionClick = () =>{
+        this.insertionSort(this.props.newArray)
+    }
+
     handleMergeClick = () => {
         this.mergeSort(this.props.newArray)
     }
@@ -120,6 +143,7 @@ export default class Algorithm extends React.Component{
             <div>
                 <button onClick={()=> this.handleBubbleClick()}>Bubble Sort</button>
                 <button onClick= {()=> this.handleSelectionClick()}>Selection Sort</button>
+                <button onClick = {()=> this.handleInsertionClick()}>Insertion Sort</button>
                 <button onClick= {()=> this.handleMergeClick()}>Merge Sort</button>
             </div>
         )
