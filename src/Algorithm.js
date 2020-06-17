@@ -48,24 +48,37 @@ export default class Algorithm extends React.Component {
         return arr;
     }
 
-    insertionSort = async (arr) => {
-        let shouldSwap;
-        console.log(arr)
-        for (var i = 1; i < arr.length; i++) {
-            var currentVal = arr[i];
-            for (var j = i - 1; j >= 0 && arr[j].value > currentVal.value; j--) {
-                shouldSwap = true
-                arr[j + 1] = arr[j]
-                console.log(arr)
+    insertionSort = async(arr) => {
+        for(var i = 1; i < arr.length; i++){
+            var currentVal = arr[i].value;
+            for(var j=i-1; j>= 0 && arr[j].value > currentVal; j--){
+                arr[j+1].value = arr[j].value
                 await sleep(250)
-                this.props.sortButton(arr, arr[i].id, arr[j].id, shouldSwap)
+                this.props.sortButton(arr, j, i, true)
             }
-            arr[j + 1] = currentVal;
-            shouldSwap = false
-            console.log(arr)
+            arr[j+1].value = currentVal
         }
         return arr
     }
+
+    // insertionSort = async (arr) => {
+    //     let shouldSwap;
+    //     console.log(arr)
+    //     for (var i = 1; i < arr.length; i++) {
+    //         var currentVal = arr[i];
+    //         for (var j = i - 1; j >= 0 && arr[j].value > currentVal.value; j--) {
+    //             shouldSwap = true
+    //             arr[j + 1] = arr[j]
+    //             console.log(arr)
+    //             await sleep(250)
+    //             this.props.sortButton(arr, arr[i].id, arr[j].id, shouldSwap)
+    //         }
+    //         arr[j + 1] = currentVal;
+    //         shouldSwap = false
+    //         console.log(arr)
+    //     }
+    //     return arr
+    // }
 
     merge = async (arr, arr1, arr2) => {
         // console.log(arr)
@@ -135,7 +148,7 @@ export default class Algorithm extends React.Component {
     }
 
     handleInsertionClick = () => {
-        this.insertionSort(this.props.newArray)
+        this.insertionSort(this.props.newArray).then(console.log)
     }
 
     handleMergeClick = () => {
