@@ -48,43 +48,29 @@ export default class Algorithm extends React.Component{
         return arr;
     }
 
-    merge(arr, arr1, arr2){
+    merge(arr1, arr2){
         let results = []
         let i = 0
         let j = 0
-
-        let indexj = arr.indexOf(arr2[j])
-                    
-        let indexi = arr.indexOf(arr1[i])
     
-        while( i < arr1.length && j<arr2.length){
+        while(i < arr1.length && j< arr2.length){
+            console.log(arr2[j])
             if(arr2[j] > arr1[i]){
-                console.log(arr, "first while loop")
-                console.log(indexj, arr2[j])
-                console.log(indexi, arr1[i])
                 results.push(arr1[i]);
                 i++
             } else{
-                console.log(arr, "second while loop")
-                console.log(indexj, arr2[j])
-                console.log(indexi, arr1[i])
                 results.push(arr2[j])
                 j++
             }
         }
         while (i < arr1.length){
-            console.log(arr, "third while loop")
-            console.log(indexi, arr1[i])
             results.push(arr1[i])
             i++;
         }
         while (j < arr2.length){
-            console.log(arr, "fourth while loop")
-            console.log(indexj, arr2[j])
             results.push(arr2[j])
             j++;
         }
-        console.log(results)
         return results
     }
     
@@ -93,7 +79,7 @@ export default class Algorithm extends React.Component{
         let mid = Math.floor(arr.length/2)
         let left = this.mergeSort(arr.slice(0, mid))
         let right = this.mergeSort(arr.slice(mid))
-        return this.merge(this.props.newArray, left,right )
+        return this.merge(left,right )
     }
 
 
@@ -107,9 +93,7 @@ export default class Algorithm extends React.Component{
     }
 
     handleMergeClick = () => {
-        console.log(this.props.newArray)
         this.mergeSort(this.props.newArray)
-        
     }
 
     
