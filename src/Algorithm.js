@@ -48,7 +48,7 @@ export default class Algorithm extends React.Component{
         return arr;
     }
 
-    merge(arr1, arr2){
+    merge(arr1, arr2, copy){
         let results = []
         let i = 0
         let j = 0
@@ -57,7 +57,6 @@ export default class Algorithm extends React.Component{
             if(arr2[j].value > arr1[i].value){
                 results.push(arr1[i]);
                 i++
-                
             } else{
                 results.push(arr2[j])
                 j++
@@ -75,12 +74,12 @@ export default class Algorithm extends React.Component{
         return results
     }
     
-    mergeSort(arr){
+    mergeSort(arr, copy){
         if(arr.length <= 1) return arr
         let mid = Math.floor(arr.length/2)
         let left = this.mergeSort(arr.slice(0, mid))
         let right = this.mergeSort(arr.slice(mid))
-        return this.merge(left,right )
+        return this.merge(left,right, copy)
     }
 
 
@@ -94,8 +93,10 @@ export default class Algorithm extends React.Component{
     }
 
     handleMergeClick = () => {
-        this.mergeSort(this.props.newArray)
-          
+        let newArray = this.props.newArray
+        let copy = [...newArray]
+        this.mergeSort(newArray)
+        console.log(copy)
     }
 
     
