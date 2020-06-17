@@ -53,11 +53,11 @@ export default class Algorithm extends React.Component{
         let i = 0
         let j = 0
     
-        while(i < arr1.length && j< arr2.length){
-            console.log(arr2[j])
-            if(arr2[j] > arr1[i]){
+        while( i < arr1.length && j < arr2.length){
+            if(arr2[j].value > arr1[i].value){
                 results.push(arr1[i]);
                 i++
+                
             } else{
                 results.push(arr2[j])
                 j++
@@ -71,6 +71,7 @@ export default class Algorithm extends React.Component{
             results.push(arr2[j])
             j++;
         }
+        console.log(results)
         return results
     }
     
@@ -94,6 +95,7 @@ export default class Algorithm extends React.Component{
 
     handleMergeClick = () => {
         this.mergeSort(this.props.newArray)
+          
     }
 
     
