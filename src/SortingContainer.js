@@ -9,7 +9,9 @@ export default class SortingContainer extends React.Component {
         sortedArray: [],
         initCompare: null,
         secondaryCompare: null,
-        shouldSwap: null
+        shouldSwap: null,
+        mergeArr1: [],
+        mergeArr2: []
     }
     //add new state that takes in arrays for visuals
 
@@ -34,6 +36,19 @@ export default class SortingContainer extends React.Component {
         let bgColor
         let element = object.value * 6
 
+        // switch(idx){
+        //     case this.state.initCompare:
+        //         bgColor = 'green';
+        //         if (idx===this.state.shouldSwap){
+        //         bgColor = 'purple';}
+        //         break;
+        //     case this.state.secondaryCompare:
+        //         bgColor = 'blue';
+        //         break;
+        //     default:
+        //         bgColor = 'red';
+        // }
+
         if ( idx === this.state.initCompare){
             bgColor = 'green'
 
@@ -43,7 +58,12 @@ export default class SortingContainer extends React.Component {
         } else if(idx === this.state.secondaryCompare){
             bgColor = 'blue'
             
-        } else{
+        } else if( idx === this.state.mergeArr1.find(id => id === idx)){
+            bgColor = 'teal'
+        } else if ( idx === this.state.mergeArr2.find(id => id === idx)){
+            bgColor = 'orange'
+        }
+        else{
             bgColor = 'red'
         }
         
@@ -51,8 +71,8 @@ export default class SortingContainer extends React.Component {
             key={object.id}
             style={{ 
                 height: `${element}px`, 
-                backgroundColor: bgColor , 
-                transform:`translateX(calc(100% * ${idx}))`
+                backgroundColor: bgColor 
+                // transform:`translateX(calc(100% * ${idx}))`
             }}
             compare1={this.state.initCompare}
             compare2={this.state.secondaryCompare}
@@ -68,6 +88,24 @@ export default class SortingContainer extends React.Component {
         })
     }
 
+    visualizeSplit = (arr1, arr2) =>{
+        let arr1Ids= []
+        let arr2Ids = []
+       for (var i=0; i < arr1.length; i++){
+            arr1Ids.push(arr1[i].id)
+        }
+
+        for (var i=0; i < arr2.length; i++){
+            arr2Ids.push(arr2[i].id)
+        }
+        this.setState({
+            mergeArr1: arr1Ids,
+            mergeArr2: arr2Ids
+        })
+        console.log("Arr 1 Ids:", arr1Ids)
+        console.log("Arr 2 Ids:", arr2Ids)
+    }
+
     // getUsers = () =>{
     //     fetch("http://localhost:3000/users")
     //     .then(resp => resp.json())
@@ -75,12 +113,13 @@ export default class SortingContainer extends React.Component {
     //   }
 
     render() {
-        console.log(this.state.newArray)
+        // console.log(this.state.newArray)
         return (
             <div>
                 <Algorithm
                     newArray={this.state.newArray}
                     sortButton={this.sortButton}
+                    visualizeSplit={this.visualizeSplit}
                 />
                     <button onClick={() => this.generateNewArray()}> Generate New Array</button>
 

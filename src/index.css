@@ -20,10 +20,12 @@ code {
 .bar{
   top: 0;
   left: 0;
-  position: absolute;
+  /* position: absolute; */
   background-color: red;
   width: 100px;
-  margin: 1px;
+  margin: 2px;
   padding: 2px;
-  transition: transform 3.0s ease;
+  border: 5px;
+  border-color: white;
+  /* transition: transform 3.0s ease; */
 }
