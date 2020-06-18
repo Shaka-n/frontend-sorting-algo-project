@@ -16,7 +16,7 @@ export default class SortingContainer extends React.Component {
         shouldSwap: null,
         mergeArr1: [],
         mergeArr2: [],
-        arrSize: 10,
+        arrSize: 20,
         isSorting: false,
         totalSorts: 0
     }
@@ -160,15 +160,17 @@ export default class SortingContainer extends React.Component {
     render() {
         // console.log(this.state.newArray)
         return (
-            <div>
-                <div>This page has performed {this.state.totalSorts} sorts.</div>
+            <div className="main-container">
+                <img src='https://i.imgur.com/kftbD9r.png' alt="AlgoRhythm" width="118" height="96"/>
+                
+                <div><p color="white">This page has performed {this.state.totalSorts} sorts.</p></div>
                 <Slider
                     onChange={this.handleArrSize}
                     value={this.state.arrSize}
-                    options={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]}
+                    options={[20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]}
                     disabled={this.state.isSorting}
                     datalistID={'arrSize'}
-                    min={10}
+                    min={20}
                 />
                 <Algorithm
                     newArray={this.state.newArray}
