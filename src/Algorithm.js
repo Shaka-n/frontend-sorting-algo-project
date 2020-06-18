@@ -107,6 +107,8 @@ export default class Algorithm extends React.Component {
         let right = await this.mergeSort(arr.slice(mid))
         // this.props.visualizeSplit(arr, left, right)
         // return
+        this.props.updateMergeOne(left)
+        this.props.updateMergeTwo(right)
         const res = await this.merge(arr, left, right)
         this.props.updateMergeSort(res)
         return res

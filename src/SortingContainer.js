@@ -71,16 +71,15 @@ export default class SortingContainer extends React.Component {
 
         if (idx === this.state.initCompare) {
             bgColor = 'green'
-
             if (this.state.shouldSwap) {
                 bgColor = 'purple'
             }
         } else if (idx === this.state.secondaryCompare) {
             bgColor = 'blue'
 
-        } else if (idx === this.state.mergeArr1.find(id => id === idx)) {
+        } else if (idx === this.state.mergeArr1.find(obj => obj.id === idx)) {
             bgColor = 'teal'
-        } else if (idx === this.state.mergeArr2.find(id => id === idx)) {
+        } else if (idx === this.state.mergeArr2.find(obj => obj.id === idx)) {
             bgColor = 'orange'
         }
         else {
@@ -121,6 +120,14 @@ export default class SortingContainer extends React.Component {
 
     }
 
+    updateMergeOne = (arr) =>{
+        this.setState({mergeArr1: arr})
+    }
+
+    updateMergeTwo = (arr) =>{
+        this.setState({mergeArr2: arr})
+    }
+
     visualizeSplit = (arr, arr1, arr2) => {
 
         let arr1Ids = []
@@ -155,19 +162,7 @@ export default class SortingContainer extends React.Component {
                 <Slider
                     onChange={this.handleArrSize}
                     value={this.state.arrSize}
-                    options={[
-                        10,
-                        20,
-                        30,
-                        40,
-                        50,
-                        60,
-                        70,
-                        80,
-                        90,
-                        100,
-                        110,
-                    ]}
+                    options={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]}
                     disabled={this.state.isSorting}
                     datalistID={'arrSize'}
                     min={10}
@@ -177,6 +172,8 @@ export default class SortingContainer extends React.Component {
                     sortButton={this.sortButton}
                     visualizeSplit={this.visualizeSplit}
                     updateMergeSort={this.updateMergeSort}
+                    updateMergeOne = {this.updateMergeOne}
+                    updateMergeTwo = {this.updateMergeTwo}
                     resetState={this.resetState}
                     disableOptions={this.disableOptions}
                     updateSortCount={this.updateSortCount}
