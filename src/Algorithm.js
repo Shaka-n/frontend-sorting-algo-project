@@ -7,6 +7,10 @@ const sleep = (milliseconds) => {
 
 export default class Algorithm extends React.Component {
 
+    state = {
+        isSorting: false
+    }
+
     bubbleSort = async (arr) => {
         let noSwaps
         for (let i = 0; i < arr.length; i++) {
@@ -64,25 +68,6 @@ export default class Algorithm extends React.Component {
         return arr
     }
 
-    // insertionSort = async (arr) => {
-    //     let shouldSwap;
-    //     console.log(arr)
-    //     for (var i = 1; i < arr.length; i++) {
-    //         var currentVal = arr[i];
-    //         for (var j = i - 1; j >= 0 && arr[j].value > currentVal.value; j--) {
-    //             shouldSwap = true
-    //             arr[j + 1] = arr[j]
-    //             console.log(arr)
-    //             await sleep(250)
-    //             this.props.sortButton(arr, arr[i].id, arr[j].id, shouldSwap)
-    //         }
-    //         arr[j + 1] = currentVal;
-    //         shouldSwap = false
-    //         console.log(arr)
-    //     }
-    //     return arr
-    // }
-
     merge = async (arr, arr1, arr2) => {
         // console.log(arr)
         // console.log(arr1)
@@ -127,35 +112,28 @@ export default class Algorithm extends React.Component {
         return res
     }
 
-    // update the screen before return results
-    // all we need to figure out is which fraction of our total image
-    // is results responding to
-
-    // store a global variable, corresponds to number of calls to merge, everytime u call merge
-    //that number increases, and you can map the value of the global variable to the position in your array
-    // where u should update results
-
-    // id tells you which bars should be shifted, which bars we need to move, which bars must be rerendered
-
-    // everytime doing merge, find which index is at the beginning and which idx is at the end,
-    // before u do the merge call, line 56
-
-    // look into the 2 arrays, find lowest position and highest positions of those values, that will tell you
-    // what range u need to update in ur picture
-    handleBubbleClick = () => {
-        this.bubbleSort(this.props.newArray)
+    handleBubbleClick = async () => {
+        this.setState({isSorting: true})
+        await this.bubbleSort(this.props.newArray)
+        this.setState({isSorting: false})
     }
 
-    handleSelectionClick = () => {
-        this.selectionSort(this.props.newArray)
+    handleSelectionClick = async () => {
+        this.setState({isSorting: true})
+        await this.selectionSort(this.props.newArray)
+        this.setState({isSorting: false})
     }
 
-    handleInsertionClick = () => {
-        this.insertionSort(this.props.newArray).then(console.log)
+    handleInsertionClick = async () => {
+        this.setState({isSorting: true})
+        await this.insertionSort(this.props.newArray)
+        this.setState({isSorting: false})
     }
 
-    handleMergeClick = () => {
-        this.mergeSort(this.props.newArray)
+    handleMergeClick = async () => {
+        this.setState({isSorting: true})
+        await this.mergeSort(this.props.newArray)
+        this.setState({isSorting: false})
     }
 
 
@@ -163,10 +141,10 @@ export default class Algorithm extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.handleBubbleClick()}>Bubble Sort</button>
-                <button onClick={() => this.handleSelectionClick()}>Selection Sort</button>
-                <button onClick={() => this.handleInsertionClick()}>Insertion Sort</button>
-                <button onClick={() => this.handleMergeClick()}>Merge Sort</button>
+                <button disabled={this.state.isSorting} onClick={() => this.handleBubbleClick()}>Bubble Sort</button>
+                <button disabled={this.state.isSorting} onClick={() => this.handleSelectionClick()}>Selection Sort</button>
+                <button disabled={this.state.isSorting} onClick={() => this.handleInsertionClick()}>Insertion Sort</button>
+                <button disabled={this.state.isSorting} onClick={() => this.handleMergeClick()}>Merge Sort</button>
             </div>
         )
     }
