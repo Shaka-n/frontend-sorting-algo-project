@@ -16,19 +16,6 @@ export default class SortingContainer extends React.Component {
         arrSize: 10
     }
 
-    resetState = () => {
-        this.setState(
-            {
-                sortedArray: [],
-                initCompare: null,
-                secondaryCompare: null,
-                shouldSwap: null,
-                mergeArr1: [],
-                mergeArr2: [],
-            }
-        )
-    }
-
     handleArrSize = (arrSize) => {
         this.setState({ arrSize })
         this.generateNewArray(arrSize)
