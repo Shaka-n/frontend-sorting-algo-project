@@ -68,7 +68,8 @@ export default class SortingContainer extends React.Component {
     generateBars = (object, idx) => {
         let bgColor
         let element = object.value * 6
-
+        console.log(this.state.mergeArr1)
+        console.log(this.state.mergeArr2)
         if (idx === this.state.initCompare) {
             bgColor = 'green'
             if (this.state.shouldSwap) {
@@ -76,10 +77,9 @@ export default class SortingContainer extends React.Component {
             }
         } else if (idx === this.state.secondaryCompare) {
             bgColor = 'blue'
-
-        } else if (idx === this.state.mergeArr1.find(obj => obj.id === idx)) {
+        } else if (this.state.mergeArr1.find(obj => obj.id === idx)) {
             bgColor = 'teal'
-        } else if (idx === this.state.mergeArr2.find(obj => obj.id === idx)) {
+        } else if (this.state.mergeArr2.find(obj => obj.id === idx)) {
             bgColor = 'orange'
         }
         else {
@@ -115,16 +115,19 @@ export default class SortingContainer extends React.Component {
             const firstPortion = prevState.newArray.slice(0, targetIndex)
             const secondPortion = prevState.newArray.slice(targetIndex + mergedArray.length, prevState.newArray.length)
             // console.log("first portion: ", firstPortion, "second portion: ", secondPortion)
+            this.setState({mergeArr1: [], mergeArr2:[]})
             return { newArray: [...firstPortion, ...mergedArray, ...secondPortion] }
         })
 
     }
 
     updateMergeOne = (arr) =>{
+        console.log(arr)
         this.setState({mergeArr1: arr})
     }
 
     updateMergeTwo = (arr) =>{
+        console.log(arr)
         this.setState({mergeArr2: arr})
     }
 
