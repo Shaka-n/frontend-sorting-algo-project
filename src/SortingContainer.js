@@ -3,6 +3,9 @@ import Algorithm from './Algorithm.js'
 import Bar from './Bar.js'
 import Slider from './Slider.js'
 
+const sortsEndpoint = "http://localhost:3000/sorts"
+const headers = {"Content-Type":"application/json"}
+
 export default class SortingContainer extends React.Component {
 
     state = {
@@ -14,7 +17,22 @@ export default class SortingContainer extends React.Component {
         mergeArr1: [],
         mergeArr2: [],
         arrSize: 10,
-        isSorting: false
+        isSorting: false,
+        totalSorts: 0
+    }
+
+    updateSortCount = (algo_name) =>{
+        fetch(sortsEndpoint, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify({
+                algo_name: algo_name,
+                times_run: 0    
+            })
+        })
+        .then(resp => resp.json())
+        .then(sort => this.setState(prevState=>({totalSorts: prevState.totalSorts+1})
+        ))
     }
 
     disableOptions = () =>{
@@ -32,6 +50,11 @@ export default class SortingContainer extends React.Component {
 
     componentDidMount() {
         this.generateNewArray(this.state.arrSize)
+        fetch(sortsEndpoint)
+        .then(resp => resp.json())
+        .then(sorts => {
+            this.setState({totalSorts:Object.keys(sorts).length})
+        })
     }
 
     generateNewArray(arrSize) {
@@ -128,6 +151,7 @@ export default class SortingContainer extends React.Component {
         // console.log(this.state.newArray)
         return (
             <div>
+                <div>This page has performed {this.state.totalSorts} sorts.</div>
                 <Slider
                     onChange={this.handleArrSize}
                     value={this.state.arrSize}
@@ -155,6 +179,7 @@ export default class SortingContainer extends React.Component {
                     updateMergeSort={this.updateMergeSort}
                     resetState={this.resetState}
                     disableOptions={this.disableOptions}
+                    updateSortCount={this.updateSortCount}
                 />
                 {/* <button onClick={() => this.generateNewArray()}> Generate New Array</button> */}
 

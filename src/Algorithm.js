@@ -117,6 +117,8 @@ export default class Algorithm extends React.Component {
         this.props.disableOptions()
         await this.bubbleSort(this.props.newArray)
         this.setState({isSorting: false})
+        this.props.disableOptions() 
+        this.props.updateSortCount('bubble')
     }
 
     handleSelectionClick = async () => {
@@ -125,6 +127,7 @@ export default class Algorithm extends React.Component {
         await this.selectionSort(this.props.newArray)
         this.setState({isSorting: false})
         this.props.disableOptions()
+        this.props.updateSortCount('selection')
     }
 
     handleInsertionClick = async () => {
@@ -133,6 +136,7 @@ export default class Algorithm extends React.Component {
         await this.insertionSort(this.props.newArray)
         this.setState({isSorting: false})
         this.props.disableOptions()
+        this.props.updateSortCount('insertion')
     }
 
     handleMergeClick = async () => {
@@ -141,6 +145,7 @@ export default class Algorithm extends React.Component {
         await this.mergeSort(this.props.newArray)
         this.setState({isSorting: false})
         this.props.disableOptions()
+        this.props.updateSortCount('merge')
     }
 
 
