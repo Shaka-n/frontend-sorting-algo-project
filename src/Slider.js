@@ -1,6 +1,11 @@
 import React from 'react';
 
 export default class Slider extends React.Component {
+
+  state ={
+    disabled: false
+  }
+
   handleChange(value) {
     this.props.onChange(value)
   }
@@ -14,6 +19,7 @@ export default class Slider extends React.Component {
           onChange={(event) => this.handleChange(event.target.value)} 
           list={this.props.datalistID}
           min={this.props.min}
+          disabled = {this.props.disabled ? "disabled" : null}
         />
         <datalist id={this.props.datalistID}>
         {

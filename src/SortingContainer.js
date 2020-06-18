@@ -13,7 +13,12 @@ export default class SortingContainer extends React.Component {
         shouldSwap: null,
         mergeArr1: [],
         mergeArr2: [],
-        arrSize: 10
+        arrSize: 10,
+        isSorting: false
+    }
+
+    disableOptions = () =>{
+        this.setState(prevState =>({isSorting: !prevState.isSorting}))
     }
 
     handleArrSize = (arrSize) => {
@@ -139,6 +144,7 @@ export default class SortingContainer extends React.Component {
                         100,
                         110,
                     ]}
+                    disabled={this.state.isSorting}
                     datalistID={'arrSize'}
                     min={10}
                 />
@@ -148,6 +154,7 @@ export default class SortingContainer extends React.Component {
                     visualizeSplit={this.visualizeSplit}
                     updateMergeSort={this.updateMergeSort}
                     resetState={this.resetState}
+                    disableOptions={this.disableOptions}
                 />
                 {/* <button onClick={() => this.generateNewArray()}> Generate New Array</button> */}
 

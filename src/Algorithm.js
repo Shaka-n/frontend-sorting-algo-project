@@ -114,26 +114,33 @@ export default class Algorithm extends React.Component {
 
     handleBubbleClick = async () => {
         this.setState({isSorting: true})
+        this.props.disableOptions()
         await this.bubbleSort(this.props.newArray)
         this.setState({isSorting: false})
     }
 
     handleSelectionClick = async () => {
         this.setState({isSorting: true})
+        this.props.disableOptions()
         await this.selectionSort(this.props.newArray)
         this.setState({isSorting: false})
+        this.props.disableOptions()
     }
 
     handleInsertionClick = async () => {
         this.setState({isSorting: true})
+        this.props.disableOptions()
         await this.insertionSort(this.props.newArray)
         this.setState({isSorting: false})
+        this.props.disableOptions()
     }
 
     handleMergeClick = async () => {
         this.setState({isSorting: true})
+        this.props.disableOptions()
         await this.mergeSort(this.props.newArray)
         this.setState({isSorting: false})
+        this.props.disableOptions()
     }
 
 
