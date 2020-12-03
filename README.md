@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a sorting algorithm visualizer that demonstrates what is happening as an algorithm steps through an unsorted array of integers. The core mechanic that enables the "animation" exploits the render cycle of React class components and JavaScript async functionality. It works by updating state on each discrete step of the chosen algorithm, and then suspending the function with a sleep timer. When the sleep timer expires, React notes that state has changed and triggers a re-render. Since the DOM elements representing the items in the array are arranged based on their position in an array in state, the DOM is rearranged on each re-render according to the result of the given step of the algorithm. This method of animation is limited by the refresh rate of the browser, which is around 20 hertz  or 16 frames per second. However, since we are concerned with slowing things down to see how they work, we don't have to worry about this. I would describe this as more of an exploit than a intended feature, but it is fun to watch. More advanced algorithms would be difficult to demonstrate with this specific implementation, but the core idea of sleeping on each loop would likely translate to most sorting algorithms.
 
 ## Available Scripts
 
@@ -36,33 +36,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
